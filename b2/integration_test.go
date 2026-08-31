@@ -1037,6 +1037,11 @@ func TestListBucketsWithKey(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer func() {
+		if err := key.Delete(ctx); err != nil {
+			t.Error(err)
+		}
+	}()
 
 	client, err := NewClient(ctx, key.ID(), key.Secret())
 	if err != nil {
@@ -1062,6 +1067,11 @@ func TestListBucketContentsWithKey(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer func() {
+		if err := key.Delete(ctx); err != nil {
+			t.Error(err)
+		}
+	}()
 	client, err := NewClient(ctx, key.ID(), key.Secret())
 	if err != nil {
 		t.Fatal(err)
